@@ -367,14 +367,14 @@ BEGIN
 
 END P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
 /
-
+*/
 /*
     UTILIZACIÓN DE PROCEDIMIENTO
 */
 
-EXECUTE P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
+--EXECUTE P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
 
-*/
+
 
 
 
@@ -431,6 +431,7 @@ END;
 */
 
 -- Creación del procedimiento
+/*
 CREATE OR REPLACE PROCEDURE formateo_cuenta 
 (
     -- Declaración de parámetros de entrada
@@ -451,8 +452,4 @@ BEGIN
     numero := guardar1 || '-' || guardar2 || '-' || guardar3|| '-' || guardar4;
 END;
 /
-
-
-/*
-    UTILIZACIÓN DE PROCEDIMIENTO
 */

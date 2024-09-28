@@ -59,6 +59,7 @@ EXECUTE P_LISTAR_EMPLEADOS;
     Crea un procedimiento llamado contar_departamentos que cuente y 
     muestre el número total de departamentos en la tabla DEPARTMENTS.
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_CONTAR_DEPARTAMENTOS
 AS
@@ -89,6 +90,7 @@ EXECUTE P_CONTAR_DEPARTAMENTOS;
     Crea un procedimiento llamado mostrar_mensaje que muestre un mensaje 
     que diga "¡Hola, este es un procedimiento sin parámetros!".
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_MOSTRAR_MENSAJE
 AS
@@ -108,6 +110,7 @@ Crear un procedimiento para calcular el total de salarios:
 Crea un procedimiento llamado calcular_total_salarios que calcule 
 y muestre el total de los salarios de todos los empleados.
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_CALCULAR_TOTAL_SALARIOS
 -- Declaración de variables
@@ -149,6 +152,7 @@ EXECUTE P_CALCULAR_TOTAL_SALARIOS;
     el employee_id y muestre la información completa del empleado.
    
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_MOSTRAR_INFORMACION_EMPLEADO
 (   -- Acá va los parámetros de entrada
@@ -265,6 +269,7 @@ EXECUTE P_CALCULAR_AUMENTO(20,103);
     Crea un procedimiento llamado listar_empleados_departamento que tome como
     parámetro el department_id y liste todos los empleados que pertenecen a ese departamento.
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_LISTAR_EMPLEADOS_DEPARTAMENTO
 (
@@ -300,6 +305,7 @@ EXECUTE P_LISTAR_EMPLEADOS_DEPARTAMENTO(00);
     parámetro el department_id y muestre el nombre del departamento correspondiente.
 
 */
+
 /*
 CREATE OR REPLACE PROCEDURE P_MOSTRAR_NOMBRE_DEPARTAMENTO
 (
@@ -345,6 +351,8 @@ EXECUTE P_MOSTRAR_NOMBRE_DEPARTAMENTO(200);
     Crea un procedimiento llamado calcular_salario_anual que tome como 
     parámetro el employee_id y calcule y muestre el salario anual de ese empleado.
 */
+
+/*
 CREATE OR REPLACE PROCEDURE P_CALCULAR_SALARIO_ANUAL
 (
     -- Declaración de parámetros
@@ -377,3 +385,322 @@ END P_CALCULAR_SALARIO_ANUAL;
 
 -- Ejecutar el procedimiento almacenado
 EXECUTE P_CALCULAR_SALARIO_ANUAL(100);
+*/
+
+
+
+
+
+/*
+    EJERCICIOS PROCEDIMIENTOS ALMACENADOS CON PARÁMETRO OUT
+*/
+
+
+/*
+    EJERCICIO 1:
+    Crear un procedimiento para obtener el nombre de un empleado:
+    Crea un procedimiento llamado obtener_nombre_empleado que tome 
+    como parámetro de entrada el employee_id y devuelva como parámetro 
+    de salida el nombre del empleado.
+*/
+
+
+/*
+    Verificar lo de IN en los parámetros
+*/
+
+
+/*
+CREATE OR REPLACE PROCEDURE P_OBTENER_NOMBRE_EMPLEADO
+(
+    -- Declaración de parámetros
+    employee_id_obtenido IN NUMBER,
+    nombre_empleado OUT employees.first_name%TYPE
+)
+AS
+BEGIN
+    -- Sentencia que obtiene el nombre completo
+    SELECT
+        first_name || ' ' || last_name
+    INTO
+        nombre_empleado
+    FROM
+        employees
+    WHERE
+        employee_id = employee_id_obtenido;
+        
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('No hay ningún departamento con ese id');
+END P_OBTENER_NOMBRE_EMPLEADO;
+/
+*/
+
+
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    employee_id NUMBER;
+    nombre VARCHAR2(75);
+BEGIN
+    -- Inicialización de variables
+    employee_id := 105;
+    nombre_completo := '';
+    
+    -- Ejecución del procedimiento
+    P_OBTENER_NOMBRE_EMPLEADO(employee_id, nombre);
+    
+    -- Resultado
+    dbms_output.put_line('El nombre del empleado es: ' || nombre_completo);
+END;
+*/
+
+
+
+/*
+    EJERCICIO 2:
+    Crear un procedimiento para obtener el salario de un empleado:
+    Crea un procedimiento llamado obtener_salario_empleado que tome 
+    como parámetro de entrada el employee_id y devuelva como parámetro 
+    de salida el salario del empleado.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_OBTENER_SALARIO_EMPLEADO
+(
+    -- Parámetros
+    employee_id_obtenido IN NUMBER,
+    salario OUT NUMBER  
+)
+AS
+BEGIN
+    -- Sentencia que obtiene el salario
+    SELECT
+        salary
+    INTO
+        salario
+    FROM
+        employees
+    WHERE
+        employee_id = employee_id_obtenido;
+        
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('No hay ningún empleado con ese id');
+END P_OBTENER_SALARIO_EMPLEADO;
+/
+*/
+
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    employee_id NUMBER;
+    salario NUMBER;
+BEGIN
+    -- Inicialización de variables
+    employee_id := 105;
+    salario := 0;
+    
+    -- Ejecución del procedimiento
+    P_OBTENER_SALARIO_EMPLEADO(employee_id, salario);
+    
+    -- Resultado
+    dbms_output.put_line('El salario del empleado es: ' || salario);
+END;
+*/
+
+
+/*
+    EJERCICIO 3:
+    Crear un procedimiento para obtener el nombre de un departamento:
+    Crea un procedimiento llamado obtener_nombre_departamento que tome como 
+    parámetro de entrada el department_id y devuelva como parámetro de salida 
+    el nombre del departamento.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_OBTENER_NOMBRE_DEPARTAMENTO
+(
+    -- Declaración de parámetros
+    department_id_obtenido IN NUMBER,
+    departamento_nombre OUT VARCHAR2
+)
+AS
+BEGIN
+    -- Sentencia que obtiene el nombre del deparamento
+    SELECT
+        department_name
+    INTO
+        departamento_nombre
+    FROM 
+        departments
+    WHERE
+        department_id = department_id_obtenido;
+        
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('No hay ningún departamento con ese id');
+END P_OBTENER_NOMBRE_DEPARTAMENTO;
+/
+*/
+
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    department_id NUMBER;
+    nombre VARCHAR2(75); -- VERIFICAR ESTO
+BEGIN
+    -- Inicialización de variables
+    department_id := 10;
+    nombre := '';
+    
+    -- Ejecución del procedimiento
+    P_OBTENER_NOMBRE_DEPARTAMENTO(department_id, nombre);
+    
+    -- Resultado
+    dbms_output.put_line('El nombre del departamento es: ' || nombre);
+END;
+*/
+
+
+/*
+    EJERCICIO 4:
+    Crear un procedimiento para obtener el número de empleados en un departamento:
+    Crea un procedimiento llamado contar_empleados_departamento que tome como 
+    parámetro de entrada el department_id y devuelva como parámetro de salida el número de empleados 
+    en ese departamento.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_CONTAR_EMPLEADOS_DEPARTAMENTO
+(
+    department_id_obtenido IN NUMBER,
+    número_empleados OUT NUMBER
+)
+AS
+BEGIN
+    -- Sentencia que obtiene el número de empleados del departamento
+    SELECT
+        COUNT(department_id)
+    INTO 
+        número_empleados
+    FROM 
+        employees
+    WHERE 
+        department_id = department_id_obtenido;
+   
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('No hay ningún departamento con ese id');
+END P_CONTAR_EMPLEADOS_DEPARTAMENTO;
+/
+*/
+
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    department_id NUMBER;
+    numero_empleados VARCHAR2(75); -- VERIFICAR ESTO
+BEGIN
+    -- Inicialización de variables
+    department_id := 50;
+    numero_empleados := 0;
+    
+    -- Ejecución del procedimiento
+    P_CONTAR_EMPLEADOS_DEPARTAMENTO(department_id, numero_empleados);
+    
+    -- Resultado
+    dbms_output.put_line('La cantidad de empleados es: ' || numero_empleados);
+END;
+*/
+
+
+/*
+    EJERCICIO 5:
+    Crear un procedimiento para obtener la ubicación de un departamento:
+    Crea un procedimiento llamado obtener_ubicacion_departamento que tome como 
+    parámetro de entrada el department_id y devuelva como parámetro de salida 
+    la ubicación del departamento.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_OBTENER_UBICACION_DEPARTAMENTO
+(
+    -- Declaración de parámetros
+    department_id_obtenido IN NUMBER,
+    ubicacion_departamento OUT VARCHAR
+)
+AS
+    -- Declaración de variables
+    id_ubicacion NUMBER;
+BEGIN
+    
+    -- Sentencia que obtiene el id de la ubicación
+    SELECT
+        location_id
+    INTO
+        id_ubicacion
+    FROM 
+        departments
+    WHERE 
+        department_id = department_id_obtenido;
+    
+    -- Sentencia que obtiene el nombre de la ubicación
+    SELECT
+        city
+    INTO 
+        ubicacion_departamento
+    FROM
+        locations
+    WHERE
+        location_id = id_ubicacion;
+    
+  
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('No hay ningún departamento con ese id');        
+END P_OBTENER_UBICACION_DEPARTAMENTO;
+/
+*/
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    department_id NUMBER;
+    ubicacion_departamento VARCHAR2(75); -- VERIFICAR ESTO
+BEGIN
+    -- Inicialización de variables
+    department_id := 40;
+    ubicacion_departamento := '';
+    
+    -- Ejecución del procedimiento
+    P_OBTENER_UBICACION_DEPARTAMENTO(department_id, ubicacion_departamento);
+    
+    -- Resultado
+    dbms_output.put_line('La ubicación del departamento es: ' || ubicacion_departamento);
+END;
+*/
