@@ -52,7 +52,6 @@ EXECUTE P_LISTAR_EMPLEADOS;
 */
 
 
-
 /*
     EJERCICIO 3:
     Crear un procedimiento para contar el número de departamentos:
@@ -106,9 +105,9 @@ EXECUTE P_MOSTRAR_MENSAJE;
 
 /*
     EJERCICIO 5:
-Crear un procedimiento para calcular el total de salarios:
-Crea un procedimiento llamado calcular_total_salarios que calcule 
-y muestre el total de los salarios de todos los empleados.
+    Crear un procedimiento para calcular el total de salarios:
+    Crea un procedimiento llamado calcular_total_salarios que calcule 
+    y muestre el total de los salarios de todos los empleados.
 */
 
 /*
@@ -135,9 +134,6 @@ END P_CALCULAR_TOTAL_SALARIOS;
 EXECUTE P_CALCULAR_TOTAL_SALARIOS;
 
 */
-
-
-
 
 
 /*
@@ -704,3 +700,284 @@ BEGIN
     dbms_output.put_line('La ubicación del departamento es: ' || ubicacion_departamento);
 END;
 */
+
+
+
+/*
+    EJERCICIOS PROCEDIMIENTOS ALMACENADOS CON PARÁMETRO IN
+*/
+
+/*
+    EJERCICIO 1:
+    Crear un procedimiento para cambiar el nombre de un departamento:
+    Crea un procedimiento llamado cambiar_nombre_departamento que tome como 
+    parámetro de entrada el department_id y el nuevo nombre, y devuelva 
+    el nombre actualizado del departamento.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_CAMBIAR_NOMBRE_DEPARTAMENTO
+(
+    -- Declaración de parámetros
+    departamento_id_obtenido NUMBER,
+    nombre_departamento_obtenido departments.department_name%TYPE
+)
+AS
+BEGIN
+    -- Actualizar nombre
+    UPDATE 
+        departments
+    SET 
+        departments.department_name = nombre_departamento_obtenido
+    WHERE 
+        department_id = departamento_id_obtenido;
+        
+    dbms_output.put_line('Nombre del departamento modificado');
+END P_CAMBIAR_NOMBRE_DEPARTAMENTO;
+/
+*/
+
+/*
+    Ejecutar el procedimiento
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    id_departamento NUMBER;
+    nombre_departamento departments.department_name%TYPE;
+BEGIN
+    -- Inicialización de variables
+    id_departamento := 100;
+    nombre_departamento := 'Finanzas';
+    
+    -- LLamar al procedimiento
+    P_CAMBIAR_NOMBRE_DEPARTAMENTO(id_departamento, nombre_departamento);
+    
+    -- Imprimir el resultado
+    dbms_output.put_line(nombre_departamento);
+END;
+/
+*/
+
+
+
+
+/*
+    EJERCICIO 2:
+    Crear un procedimiento para aumentar el salario de un empleado:
+    Crea un procedimiento llamado aumentar_salario que tome como parámetro 
+    de entrada el employee_id y el porcentaje de aumento, y devuelva como 
+    parámetro de salida el nuevo salario.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_AUMENTAR_SALARIO
+(
+    -- Declaración de parametros
+    employee_id_obtenido IN NUMBER,
+    porcentaje_aumento_obtenido IN OUT NUMBER
+)
+AS
+    salario NUMBER;
+BEGIN
+    -- Obtener el salario
+    SELECT
+        salary
+    INTO
+        salario
+    FROM 
+        employees
+    WHERE 
+        employee_id = employee_id_obtenido;
+        
+    -- proceso para aumentar salario
+    porcentaje_aumento_obtenido := salario + (salario * porcentaje_aumento_obtenido) / 100;
+    
+END P_AUMENTAR_SALARIO;
+/
+*/
+
+
+/*
+    Ejecutar el procedimiento
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    employee_id NUMBER;
+    aumento_salario NUMBER;
+BEGIN
+    -- Inicialización de variables
+    employee_id := 104;
+    aumento_salario := 20;
+    
+    -- LLamar al procedimiento
+    P_AUMENTAR_SALARIO(employee_id, aumento_salario);
+    
+    -- Imprimir el resultado
+    dbms_output.put_line(aumento_salario);
+END;
+*/
+
+
+
+/*
+    EJERCICIO 3:
+    Crear un procedimiento para actualizar la ubicación de un departamento:
+    Crea un procedimiento llamado actualizar_ubicacion_departamento que tome 
+    como parámetro de entrada el department_id y la nueva ubicación, y devuelva la ubicación actualizada.
+*/
+
+/*
+CREATE OR REPLACE PROCEDURE P_ACTUALIZAR_UBICACION_DEPARTAMENTO
+(
+    -- Declaración de parámetros
+    department_id_obtenido IN NUMBER,
+    ubicacion_departamento IN OUT VARCHAR
+)
+AS
+    -- Declaración de variables
+    id_ubicacion NUMBER;
+BEGIN
+    -- Sentencia que obtiene el id de la ubicación
+    SELECT
+        location_id
+    INTO
+        id_ubicacion
+    FROM 
+        departments
+    WHERE 
+        department_id = department_id_obtenido;
+    
+    -- Sentencia que actualiza el nombre de la ubicación    
+    UPDATE locations
+    SET 
+        city = ubicacion_departamento
+    WHERE
+        location_id = id_ubicacion;
+  
+END P_ACTUALIZAR_UBICACION_DEPARTAMENTO;
+/
+*/
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    department_id NUMBER;
+    nombre_ciudad VARCHAR2(75); -- VERIFICAR ESTO
+BEGIN
+    -- Inicialización de variables
+    department_id := 10;
+    nombre_ciudad := 'Seattle 2';
+    
+    -- Ejecución del procedimiento
+    P_ACTUALIZAR_UBICACION_DEPARTAMENTO(department_id, nombre_ciudad);
+    
+    -- Resultado
+    dbms_output.put_line('El nuevo nombre del pais es: ' || nombre_ciudad);
+END;
+/
+*/
+
+
+/*
+    EJERCICIO 4:
+    Crear un procedimiento para promover a un empleado:
+    Crea un procedimiento llamado promover_empleado que tome como 
+    parámetros de entrada el employee_id y el nuevo job_id, y devuelva el nuevo job_id del empleado.
+*/
+/*
+CREATE OR REPLACE PROCEDURE P_PROMOVER_EMPLEADO
+(
+    -- Declaración
+    employee_id_obtenido IN NUMBER,
+    job_id_obtenido IN OUT VARCHAR
+)
+AS
+BEGIN
+    
+    UPDATE 
+        employees
+    SET 
+        job_id = job_id_obtenido
+    WHERE
+        employee_id = employee_id_obtenido;
+        
+    dbms_output.put_line('Trabajo actualizado');
+        
+END P_PROMOVER_EMPLEADO;
+/
+
+/*
+    Utilización del procedimiento almacenado
+*/
+
+/*
+SET SERVEROUTPUT ON
+DECLARE
+    id_empleado NUMBER;
+    tipo_trabajo VARCHAR2(100);
+BEGIN
+    -- Inicialización de variables
+    id_empleado := 100;
+    tipo_trabajo := 'AD_VP';
+    
+    P_PROMOVER_EMPLEADO(id_empleado, tipo_trabajo);
+    
+    dbms_output.put_line('El nuevo tipo de trabajo es: ' || tipo_trabajo);
+END;
+/
+*/
+
+
+/*
+    EJERCICIO 5:
+    Crear un procedimiento para cambiar el nombre de un empleado
+    Crea un procedimiento llamado cambiar_nombre_empleado que tome 
+    como parámetros de entrada el employee_id y el nuevo nombre, y 
+    devuelva el nombre actualizado del empleado.
+*/
+CREATE OR REPLACE PROCEDURE P_CAMBIAR_NOMBRE_EMPLEADO
+(
+    -- Declaracion de parámetros
+    employee_id_obtenido IN NUMBER,
+    employee_nombre IN OUT VARCHAR2
+)
+AS
+BEGIN
+    UPDATE
+        employees
+    SET 
+        first_name = employee_nombre
+    WHERE
+        employee_id = employee_id_obtenido;
+        
+END P_CAMBIAR_NOMBRE_EMPLEADO;
+/
+
+/*
+    Utilización del procedimiento almacenado
+*/
+SET SERVEROUTPUT ON
+DECLARE
+ empleado_id NUMBER;
+ nombre_empleado VARCHAR2(25);
+BEGIN
+    -- Inicialización
+    empleado_id := 100;
+    nombre_empleado := 'Douglas';
+    
+    -- Ejecutar procedimiento
+    P_CAMBIAR_NOMBRE_EMPLEADO(100, nombre_empleado);
+    
+    -- Mostrar
+    dbms_output.put_line(nombre_empleado);
+    
+END;
+/
