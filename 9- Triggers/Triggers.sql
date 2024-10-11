@@ -495,3 +495,46 @@ BEGIN
     END IF;
    
 END;
+/
+
+/*
+    PRACTICA TERCERA PARTE TRIGGERS CON EVENTOS MÚLTIPLES
+*/
+
+/*
+    EJERCICIO 1:
+    Trigger múltiple para employees: Crea un trigger que se active antes 
+    de cualquier operación(insert, update o delete) en la tabla employees. 
+    Si la operación es realizada por un usuario distinto de HR, 
+    debe levantar un error con RAISE_APPLICATION_ERROR.
+*/
+CREATE OR REPLACE TRIGGER TR_MULTIPLE_EMPLOYEES
+BEFORE INSERT OR DELETE OR UPDATE 
+ON employees
+BEGIN
+    IF USER <> 'HR' THEN
+        RAISE_APPLICATION_ERROR(-20003, 'No puede realizar ninguna acción de INSERT, UPDATE Y DELETE');
+    END IF;
+END;
+/
+
+/*
+    EJERCICIO 2:
+    Trigger para limitar operaciones en departments: 
+    Crea un trigger que se active antes de cualquier operación 
+    (insert, update, delete) en la tabla departments. 
+    Si el departamento es el de IT, debe impedir cualquier 
+    cambio, mostrando un mensaje de error que indique 
+    "El departamento IT no puede ser modificado".
+*/
+
+CREATE OR REPLACE TRIGGER TR_LIMITAR_OPERACIONES_DEPARTMENTS
+BEFORE INSERT OR UPDATE OR DELETE ON departments
+FOR EACH ROW
+BEGIN
+    IF :NEW.department_name = 'IT' THEN
+        RAISE_APPLICATION_ERROR(-20004, 'El departamento IT no puede ser modificado');
+    END IF;
+END;
+/
+SELECT * FROM DEPARTMENTS;
