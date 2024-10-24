@@ -2,28 +2,29 @@
     Bloques anónimos
 */
 
+
 -- Imprimir un número
-/*
 BEGIN
+    -- Imprimir el número 4
     dbms_output.put_line(4);
 END;
-*/
+/
 
 
 -- Imprimir cadenas de textos y números
-/*
+
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 BEGIN
+    -- Impresión por consola
     dbms_output.put_line(4);
     dbms_output.put_line('Douglas Quele');
     dbms_output.put_line('Douglas' || 'Quele');
 END;
-*/
+/
 
 
-
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 BEGIN
@@ -32,7 +33,7 @@ BEGIN
     dbms_output.put_line(19);
 
 END;
-*/
+/
 
 
 /*
@@ -40,8 +41,6 @@ END;
 */
 
 
-
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Acá declaramos variables
@@ -51,15 +50,13 @@ BEGIN
     -- Impresión de el valor de la variable IVA
     dbms_output.put_line(IVA);
 END;
-*/
-
-
+/
 
 
 --CONSTANT AND NOT NULL
+
 --sino se inicializa la variable hagarra el valor de null
 
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Donde se declarán las variables
@@ -78,8 +75,7 @@ BEGIN
     numero:=16;
     dbms_output.put_line(numero);
 END;
-*/
-
+/
 
 
 /*
@@ -90,7 +86,8 @@ END;
 /*
     Crear dos variables de tipo numérico y visualizar su suma
 */
-/*
+
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variables
@@ -102,17 +99,15 @@ BEGIN
     resultado := numero1 + numero2;
     dbms_output.put_line(resultado);
 END;
-
-*/
+/
 
 
 /*
     Modificar el ejemplo anterior y ponemos null como valor de una de las 
     variables. ¿Qué resultado arroja? Volvemos a ponerla un valor numérico
-
 */
 
-/*
+
 -- Cualquier operación que lleve un null devuelve un null
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
@@ -125,8 +120,7 @@ BEGIN
     resultado := numero1 + numero3;
     dbms_output.put_line(resultado);
 END;
-
-*/
+/
 
 
 /*
@@ -135,7 +129,8 @@ END;
     nacimiento. Visualizarlas por separado y luego intentar concatenarlas. ¿es 
     posible?
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     nombre VARCHAR2(100):= 'Douglas';
@@ -149,5 +144,4 @@ BEGIN
     dbms_output.put_line(edad);
     dbms_output.put_line(fechaNacimiento);
 END;
-
-*/
+/

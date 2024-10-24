@@ -35,13 +35,11 @@ END;
 */
 
 
-
 /*
     Sintaxis
 */
 
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaración de variable
@@ -71,8 +69,6 @@ EXCEPTION
         NULL;
 END;
 /
-*/
-
 
 
 /*
@@ -80,7 +76,6 @@ END;
 */
 
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaración de variable
@@ -108,8 +103,7 @@ EXCEPTION
     WHEN OTHERS THEN
         dbms_output.put_line('Error no definido');
 END;
-*/
-
+/
 
 
 /*
@@ -122,7 +116,8 @@ END;
     Escribe un bloque PL/SQL que intente recuperar los datos de un empleado usando su employee_id. 
     Si el empleado no existe, captura la excepción NO_DATA_FOUND y muestra un mensaje adecuado.
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     empleado EMPLOYEES%ROWTYPE;
@@ -143,9 +138,6 @@ EXCEPTION
         dbms_output.put_line('Error no definido');
 END;
 /
-*/
-
-
 
 
 /*
@@ -154,7 +146,8 @@ END;
     Si hay más de un empleado en el departamento, captura la excepciónn 
     TOO_MANY_ROWS y muestra un mensaje de error.
 */
-/*
+
+
 DECLARE
     salario employees.salary%TYPE;
 BEGIN
@@ -176,9 +169,6 @@ BEGIN
             dbms_output.put_line('Error no definido');
 END;
 /
-*/
-
-
 
 
 /*
@@ -187,7 +177,7 @@ END;
     captura la excepciÃ³n general OTHERS y muestra un mensaje.
 */
 
-/*
+
 DECLARE
     numero1 NUMBER := 3;
     numero2 NUMBER := 0;
@@ -202,15 +192,14 @@ BEGIN
             dbms_output.put_line('No se puede realizar la divisiónn');
 END;
 /
-*/
-
 
 
 /*
     Excepciones no predefinidas (Son de oracle)
     https://docs.oracle.com/database/121/LNPLS/errors.htm#LNPLS99869
 */
-/*
+
+
 DECLARE
     -- Declaración de una excepción personalizada
     miexcepcion EXCEPTION;
@@ -246,9 +235,6 @@ EXCEPTION
         dbms_output.put_line('Error indefinido');
 END;
 /
-*/
-
-
 
 
 /*
@@ -256,7 +242,7 @@ END;
     Son funciones de PL/SQL que permiten obtener el código y descripción del problema respectivamente
 */
 
-/*
+
 DECLARE
     empleado employees%ROWTYPE;
     
@@ -282,13 +268,12 @@ EXCEPTION
   --      dbms_output.put_line('la recuperación devuelve un número mayor de filas que el permtido');
 END;
 /
-*/
-
 
 
 /*
     PRACTICA
 */
+
 
 /*
     Ejercicio 1:
@@ -306,7 +291,8 @@ END;
     en la consulta"
 
 */
-/*
+
+
 SET SERVEROUTPUT ON
 --Declaración de variables
 DECLARE
@@ -317,7 +303,8 @@ DECLARE
 BEGIN
     SELECT
         employees.first_name
-    INTO empleado_nombre
+    INTO 
+        empleado_nombre
     FROM
         employees
     WHERE
@@ -332,7 +319,7 @@ EXCEPTION
         dbms_output.put_line('No es posible traer más de una fila');
 END;
 /
-*/
+
 
 /*
     Modificar la consulta para que devuelva un error de divisiónn por CERO,
@@ -342,7 +329,7 @@ END;
     y SQLERRM
 */
 
-/*
+
 SET SERVEROUTPUT ON
 --Declaración de variables
 DECLARE    
@@ -369,7 +356,7 @@ EXCEPTION
         dbms_output.put_line(SQLERRM);
 END;
 /
-*/
+
 
 /*
     Ejercicio 3:
@@ -384,7 +371,8 @@ END;
     - Cuando se genere ese error debemos pintar "Clave duplicada, intente
     otra".   
 */
-/*
+
+
 SET SERVEROUTPUT ON
 
 DECLARE
@@ -400,6 +388,3 @@ EXCEPTION
         dbms_output.put_line('Clave duplicada, intente otra');
 END;
 /
-*/
-
-

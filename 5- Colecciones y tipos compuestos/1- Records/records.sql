@@ -43,12 +43,6 @@
 */
 
 
-
-
-
-
-
-/*
 SET SERVEROUTPUT ON
 
 DECLARE
@@ -67,7 +61,8 @@ BEGIN
     --y se almacenan en 'empleado1.datos'
     SELECT
         *
-    INTO empleado1.datos
+    INTO 
+        empleado1.datos
     FROM
         employees
     WHERE
@@ -88,12 +83,9 @@ BEGIN
     dbms_output.put_line(empleado1.fecha);    -- Imprime la fecha de contrataciÃ³n
     dbms_output.put_line(empleado1.datos.first_name); -- Imprime el primer nombre desde 'datos'
 END;
-
-*/
-
+/
 
 
-/*
 DECLARE
     -- Definición de un record llamado emp_info
     TYPE emp_info IS RECORD (
@@ -114,10 +106,8 @@ BEGIN
         employees e, departments d
     WHERE 
         e.department_id = d.department_id AND e.employee_id = 101;
-END
-*/
-
-
+END;
+/
 
 
 /*
@@ -125,13 +115,13 @@ END
 */
 
 
-
 /*
     Ejercicio 1 Definir un RECORD con columnas especificas
     Crea un tipo RECORD que almacene el nombre y salario de un empleado. 
     Selecciona los datos del empleado con employee_id = 102 y muestra el nombre y salario en la consola
 */
-/*
+
+
 DECLARE
     --Creación del record
     TYPE empleado_record IS RECORD (
@@ -143,7 +133,7 @@ DECLARE
     --Creación de variable
     empleado empleado_record;
 BEGIN
-    /*
+    
     SELECT
         first_name,
         salary
@@ -171,11 +161,6 @@ BEGIN
     
 END;
 /
-*/
-
-
-
-
 
 
 /*
@@ -186,7 +171,7 @@ END;
     maneja la excepción no_data_found.
 */
 
-/*
+
 DECLARE
     --Creacion del record
     TYPE empleado_info IS RECORD (
@@ -222,11 +207,7 @@ EXCEPTION
     WHEN no_data_found THEN
         dbms_output.put_line('Empleado no encontrado.');
 END;
-*/
-
-
-
-
+/
 
 
 /*
@@ -237,8 +218,9 @@ END;
 /*
     INSERT
 */
+
+
 --1: Crear tabla basada en regiones
-/*
 CREATE TABLE regiones AS
         SELECT
             *
@@ -264,9 +246,6 @@ BEGIN
 
 END;
 /
-*/
-
-
 
 
 /*
@@ -274,7 +253,6 @@ END;
 */
 
 
-/*
 DECLARE
     region1 regions%rowtype;
 BEGIN
@@ -289,9 +267,4 @@ BEGIN
         region_id = 1;
 
 END;
-*/
-
-
-
-
-
+/

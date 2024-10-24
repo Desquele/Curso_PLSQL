@@ -8,7 +8,6 @@
 */
 
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
     -- Variable con el mismo tipo de la columna c1
@@ -24,14 +23,13 @@ BEGIN
     COMMIT; -- Deberia de llevarlo en insert, update, delete
 END;
 /
-*/
 
 
 /*
     UPDATES
 */
 
-/*
+
 DECLARE
     -- Variable con el mismo tipo de la columna c1
     columna_c1 test.C1%TYPE;
@@ -46,8 +44,7 @@ BEGIN
     
     commit;
 END;
-*/
-
+/
 
 
 /*
@@ -55,7 +52,6 @@ END;
 */
 
 
-/*
 DECLARE
     -- Variable con el mismo tipo de la columna c1
     columna_c1 test.C1%TYPE;
@@ -68,7 +64,6 @@ BEGIN
     COMMIT;
 END;
 / 
-*/
 
 
 /*
@@ -95,7 +90,7 @@ END;
     
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaracion de variables 
@@ -128,8 +123,6 @@ BEGIN
 END;
 /
 
-*/
-
 
 /*
         Ejercicio 2:
@@ -137,7 +130,7 @@ END;
         departamento a 1700. En este caso usemos el COMMIT dentro del bloque
         PL/SQL.
 */
-/*
+
 
 SET SERVEROUTPUT ON
 DECLARE
@@ -152,10 +145,6 @@ BEGIN
     WHERE department_id = 271;
 END;
 /
-*/
-
-
-
 
 
 /*
@@ -163,7 +152,6 @@ END;
     Por último, hacer otro bloque PL/SQL que elimine ese departamento nuevo.
 */
 
-/*
 DECLARE
     id_departamento DEPARTMENTS.department_id%TYPE;
 BEGIN
@@ -174,5 +162,3 @@ BEGIN
     WHERE departments.department_id = id_departamento;
 END;
 /
-
-*/

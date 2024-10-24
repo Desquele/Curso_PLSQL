@@ -19,17 +19,39 @@ AS OBJECT(
     
     -- Métodos
     MEMBER FUNCTION ver_producto RETURN VARCHAR2,
-    MEMBER FUNCTION ver_precio RETURN NUMBER,
-    MEMBER PROCEDURE cambiar_precio (precio NUMBER)
+    MEMBER PROCEDURE cambiar_precio (precio NUMBER),
+    MEMBER FUNCTION ver_precio RETURN NUMBER, -- Función sin parámetros
+    MEMBER FUNCTION ver_precio(impuestos NUMBER) RETURN NUMBER, -- Función con parámetro
     
-);
+    
+    -- Constructor
+    CONSTRUCTOR FUNCTION PRODUCTO(p_nombre VARCHAR2) RETURN SELF AS RESULT
+) NOT FINAL; -- PERMITE LA HERENCIA
 /
+
 
 /*
     2. CUERPO
 */
+
+
+-- Crear una secuencia que se utilizará en el codigo
+CREATE SEQUENCE sequencia_1;
+
 CREATE OR REPLACE TYPE BODY PRODUCTO
 AS
+    -- Constructor
+    CONSTRUCTOR FUNCTION PRODUCTO(p_nombre VARCHAR2)
+    RETURN SELF AS RESULT
+    IS
+    BEGIN
+        SELF.codigo := sequencia_1.nextval;
+        SELF.PRECIO := NULL;
+        SELF.nombre := p_nombre;
+        
+        RETURN;
+    END;
+
     -- Método para ver el producto
     MEMBER FUNCTION ver_producto
     RETURN VARCHAR2
@@ -46,6 +68,15 @@ AS
         RETURN precio;
     END ver_precio;
     
+    -- Método para ver el precio con impuestos (sobrecarga)
+    MEMBER FUNCTION ver_precio(impuestos NUMBER)
+    RETURN NUMBER
+    AS
+    BEGIN
+        RETURN precio - precio * impuestos / 100;
+    END ver_precio; 
+ 
+ 
     -- Método para cambiar precio
     MEMBER PROCEDURE cambiar_precio(precio NUMBER)
     AS
@@ -61,10 +92,13 @@ END;
 /*
     UTILIZACIÓN
 */
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaración de la variable
     producto1 producto;
+    producto2 producto;
+    producto3 producto;
 BEGIN
     -- Creación de la variable
     producto1 := producto(01, 'Telefono Samsung', 300);
@@ -73,7 +107,11 @@ BEGIN
     dbms_output.put_line(producto1.ver_producto());
     
     -- Ver el precio
-     dbms_output.put_line(producto1.ver_precio());
+    dbms_output.put_line(producto1.ver_precio());
+     
+    -- Ver precio, sobrecarga
+    dbms_output.put_line(producto1.ver_precio(50));
+
      
     -- Cambiar el precio
     producto1.cambiar_precio(350);
@@ -83,6 +121,14 @@ BEGIN
     producto1.nombre := 'Telefono Samsung 2';
     dbms_output.put_line(producto1.ver_producto());
 
+    dbms_output.put_line('------ PROBANDO EL CONSTRUCTOR ------');
+    
+    producto2 := PRODUCTO('Guineo');
+    dbms_output.put_line(producto2.ver_producto());
+
+    producto3 := PRODUCTO('Reloj');
+    dbms_output.put_line(producto3.ver_producto());
+    
 END;
 /
 
@@ -93,6 +139,8 @@ END;
     sin necesidad de crear un objeto de esa clase. Estos métodos están asociados 
     con el tipo de objeto en sí mismo, en lugar de con una instancia específica.
 */
+
+
 -- Definir un tipo de objeto con un método estático
 CREATE OR REPLACE TYPE PRODUCTO_ESTATICO AS OBJECT (
     
@@ -113,8 +161,11 @@ CREATE OR REPLACE TYPE PRODUCTO_ESTATICO AS OBJECT (
 
 -- Definir el cuerpo del tipo de objeto
 CREATE OR REPLACE TYPE BODY PRODUCTO_ESTATICO AS
+
     -- Método para ver el producto
-    MEMBER FUNCTION ver_producto RETURN VARCHAR2 AS
+    MEMBER FUNCTION ver_producto 
+    RETURN VARCHAR2 
+    AS
     BEGIN
         RETURN 'Código: ' || codigo || ', nombre: ' || nombre || ', precio: ' || precio;
     END ver_producto;
@@ -140,6 +191,7 @@ CREATE OR REPLACE TYPE BODY PRODUCTO_ESTATICO AS
 END;
 /
 
+
 -- Utilización del método estático
 DECLARE
     precio_original NUMBER := 100;
@@ -152,10 +204,10 @@ END;
 /
 
 
-
 /*
     MINI PRÁCTICA
 */
+
 
 /*
     EJERCICIO 1:
@@ -250,10 +302,12 @@ CREATE OR REPLACE TYPE PRODUCTO AS OBJECT(
     
     -- Método miembro
     MEMBER PROCEDURE ASIGNAR_PRECIO(p_precio NUMBER),
+    
     MEMBER FUNCTION VER_PRODUCTO RETURN VARCHAR2
 
 );
 /
+
 
 -- Cuerpo
 CREATE OR REPLACE TYPE BODY PRODUCTO
@@ -284,6 +338,8 @@ AS
     END VER_PRODUCTO;
 END;
 /
+
+
 /*
     UTILIZACIÓN
 */
@@ -303,3 +359,75 @@ BEGIN
     -- Mostrar producto
     dbms_output.put_line(telefono.VER_PRODUCTO);
 END;
+/
+
+
+/*
+    COMPROBAR LOS OBJETOS QUE TENEMOS
+*/
+
+
+DESC PRODUCTO;
+SELECT * FROM USER_TYPES;
+
+-- Ver el codigo fuente
+SELECT * FROM USER_SOURCE WHERE NAME = 'PRODUCTO';
+
+SELECT TEXT FROM USER_SOURCE WHERE NAME = 'PRODUCTO';
+
+
+
+/*
+    HERENCIA
+    
+    Se usa la Cláusula UNDER para que sea heredable,
+    el objeto o método debe ser "NOT FINAL"
+*/
+
+CREATE OR REPLACE TYPE COMESTIBLES UNDER PRODUCTO(
+    -- VARIABLES
+    caducidad DATE,
+    
+    -- Funciones
+    MEMBER FUNCTION VER_CADUCIDAD RETURN VARCHAR2,
+    -- Sobre escribir
+    OVERRIDING MEMBER FUNCTION ver_precio RETURN NUMBER -- Sobre escritura
+);
+/
+
+
+CREATE OR REPLACE TYPE BODY COMESTIBLES
+AS
+    -- Funciones
+    MEMBER FUNCTION ver_caducidad 
+    RETURN VARCHAR2
+    AS
+    BEGIN
+        return caducidad;
+    END;
+    
+    -- Sobre escritura
+    OVERRIDING MEMBER FUNCTION ver_precio
+    RETURN NUMBER
+    AS
+    BEGIN
+        RETURN precio + 10;
+    END;
+END;
+/
+
+
+/*
+    UTILIZACIÓN
+*/
+SET SERVEROUTPUT ON
+DECLARE
+    comestible comestibles := comestibles(100,'Churritos', 20,sysdate());
+BEGIN
+
+    dbms_output.put_line(comestible.ver_precio);
+
+END;
+/
+
+DROP TYPE COMESTIBLES;

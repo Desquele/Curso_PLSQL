@@ -2,6 +2,7 @@
     ARRAYS ASOCIATIVOS, SELECTS MULTIPLES CON ARRAYS ASOCIATIVOS
 */
 
+
 /*
     Colecciones y tipos compuestos: Almacenan objetos del mismo tipo, parecido a los arrays
  
@@ -67,14 +68,12 @@
 */
 
 
-
-
 /*
     Trabajar con arrays asociativos
 */
 
 
-/*
+
 SET SERVEROUTPUT ON 
 DECLARE
     --Declaración de Arrays
@@ -123,17 +122,23 @@ BEGIN
     
     SELECT 
         *
-    INTO empleados(1) 
-    FROM EMPLOYEES
-    WHERE employee_id = 100;
+    INTO 
+        empleados(1) 
+    FROM 
+        EMPLOYEES
+    WHERE 
+        employee_id = 100;
     
     dbms_output.put_line(empleados(1).first_name);
     
     SELECT 
         *
-    INTO empleados(2) 
-    FROM EMPLOYEES
-    WHERE employee_id = 101;
+    INTO 
+        empleados(2) 
+    FROM 
+        EMPLOYEES
+    WHERE 
+        employee_id = 101;
     
     dbms_output.put_line(empleados(2).first_name);
 EXCEPTION
@@ -141,7 +146,7 @@ EXCEPTION
         dbms_output.put_line(SQLCODE);
         dbms_output.put_line(SQLERRM);
 END;
-*/
+/
 
 
 
@@ -149,6 +154,7 @@ END;
 /*
     Practica
 */
+
 
 /*
     Ejercicio 1:
@@ -159,7 +165,8 @@ END;
     5. Muestra los resultados usando DBMS_OUTPUT.PUT_LINE.
        
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     --Creación del array
@@ -186,7 +193,7 @@ BEGIN
     --Mostrar la cantidad de elementos en el array
     dbms_output.put_line(numeros.count);
 END;
-*/
+/
 
 
 /*
@@ -195,7 +202,8 @@ END;
     2. Agrega varios elementos al array con diferentes índices.
     3. Usa los métodos FIRST, LAST, PRIOR, y NEXT para recorrer los índices del array y mostrar los valores correspondientes.
 */
-/*
+
+
 SET SERVEROUT ON
 DECLARE
     -- Creación del array
@@ -227,7 +235,7 @@ BEGIN
         idx := cadena.NEXT(idx);
     END LOOP;
 END;
-*/
+/
 
 
 /*
@@ -238,7 +246,8 @@ END;
     4. Usa el método DELETE sin parámetros para borrar todos los elementos.
     5. Muestra el número de elementos después de cada operación para verificar los cambios.
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Creación del array
@@ -306,16 +315,7 @@ BEGIN
         indice := numeros.next(indice);
     END LOOP;
 END;
-
-*/
-
-
-
-/*
-    Falta hacer lo del 82
-*/
-
-
+/
 
 
 /*
@@ -346,6 +346,7 @@ END;
     borrado
 */
 
+
 SET SERVEROUT ON
 DECLARE
 
@@ -370,14 +371,20 @@ DECLARE
 BEGIN
 
  --Obtener el id del empleado menor
-    SELECT MIN(EMPLOYEE_ID)
-    INTO id_employee_menor
-    FROM EMPLOYEES;
+    SELECT 
+        MIN(EMPLOYEE_ID)
+    INTO 
+        id_employee_menor
+    FROM 
+        EMPLOYEES;
     
     -- Obtener el id del empleado mayor
-    SELECT MAX(EMPLOYEE_ID)
-    INTO id_employee_mayor
-    FROM EMPLOYEES;
+    SELECT 
+        MAX(EMPLOYEE_ID)
+    INTO 
+        id_employee_mayor
+    FROM 
+        EMPLOYEES;
     
         
     -- Mediante un bucle cargamos en la colección los empleados. El campo NAME
@@ -388,9 +395,12 @@ BEGIN
             LAST_NAME,
             SALARY,
             DEPARTMENT_ID
-        INTO empleados(i)
-        FROM EMPLOYEES
-        WHERE employee_id = i;
+        INTO 
+            empleados(i)
+        FROM 
+            EMPLOYEES
+        WHERE 
+            employee_id = i;
     END LOOP; 
     
     -- Visualizar toda la colección:

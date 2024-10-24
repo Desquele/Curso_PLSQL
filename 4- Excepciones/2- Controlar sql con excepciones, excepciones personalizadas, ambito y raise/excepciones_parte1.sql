@@ -3,10 +3,12 @@
     Y RAISE_APPLICATION_ERROR
 */
 
+
 /*
     Controla SQL con excepciones
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     --Declaración de variables
@@ -20,7 +22,8 @@ BEGIN
     --Consulta SQL
     SELECT
         region_id
-    INTO reg_control
+    INTO 
+        reg_control
     FROM
         regions
     WHERE
@@ -34,15 +37,15 @@ EXCEPTION
         VALUES (reg.region_id,reg.region_name);
         COMMIT;
 END;
-*/
-
+/
 
 
 /*
     Excepciones de usuario
     SOn las excepciones creadas por los usuarios 
 */
-/*
+
+
 DECLARE
     -- 1. Definir una excepción personalizada
     excepcion_region_maxima EXCEPTION;
@@ -77,7 +80,7 @@ EXCEPTION
         -- Mostrar un mensaje con el código de error y su descripción
         dbms_output.put_line('CÃ³digo de error: ' || SQLCODE || ', DescripciÃ³n: ' || SQLERRM);
 END;
-*/
+/
 
 
 /*
@@ -86,7 +89,7 @@ END;
 
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     -- 1. Definir la variable
@@ -111,14 +114,14 @@ EXCEPTION
         dbms_output.put_line('Debe ser inferior a 200');
 END;
 /
-*/
 
 
 /*
     Ambitos de las excepciones "Similar a las variables de los bloques"
     0 sea, el bloque hijo puede acceder a los atributos del bloque padre pero no al revez
 */
-/*
+
+
 DECLARE
     -- Declaración de variables principales
     region_id NUMBER;               
@@ -150,15 +153,15 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('El ID de la región no puede ser mayor de 100. BLOQUE HIJO');
     END;
 END;
-*/
-
+/
 
 
 /*
     RAISE_APPLICATION_ERROR
     Código que puedo utilizar en rango de -20000 Y -20999
 */
-/*
+
+
 DECLARE
     -- Declarar variables para almacenar los valores de la región
     id_region NUMBER;          -- Almacena el ID de la región
@@ -179,7 +182,7 @@ BEGIN
         VALUES (id_region, nombre_region);
     END IF;
 END;
-*/
+/
 
 
 /*
@@ -188,7 +191,7 @@ END;
 
 
 /*
-    EJERCICIO:
+    EJERCICIO 1:
     
     Crear una Excepción personalizada denominada CONTROL_REGIONES.
     
@@ -201,7 +204,7 @@ END;
     dispararse de forma manual con el RAISE
 */
 
-/*
+
 SET SERVEROUTPUT ON
 
 DECLARE
@@ -222,9 +225,7 @@ EXCEPTION
         dbms_output.put_line(sqlcode);
         dbms_output.put_line(sqlerrm);
 END;
-
-*/
-
+/
 
 
 /*
@@ -233,6 +234,7 @@ END;
         a. Esto permite que la aplicación pueda capturar y gestionar el error que 
         devuelve el PL/SQL
 */
+
 
 SET SERVEROUTPUT ON
 
@@ -254,3 +256,4 @@ EXCEPTION
         dbms_output.put_line(sqlcode);
         dbms_output.put_line(sqlerrm);
 END;
+/

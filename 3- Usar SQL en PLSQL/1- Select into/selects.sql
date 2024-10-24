@@ -13,7 +13,6 @@
 
 
 -- Cuando se ocupa solo un resultado
-/*
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaracion de variable donde se guardará  el resultado
@@ -21,7 +20,9 @@ DECLARE
 BEGIN
     --Obtener el salario del empleado id 100
     SELECT 
-        salary INTO salario --Into indica donde se guardara el resultado (en este caso en salario)
+        salary 
+    INTO 
+    salario --Into indica donde se guardara el resultado (en este caso en salario)
     FROM 
         EMPLOYEES
     WHERE
@@ -30,13 +31,11 @@ BEGIN
     --Mostrando el resultado
     dbms_output.put_line(salario);
 END;
-*/
+/
 
 
 --Cuando se trae más de un resultado
-/*
 SET SERVEROUTPUT ON
-
 DECLARE
     -- Declaración de variable para almacenar el salario
     salario NUMBER; 
@@ -54,10 +53,7 @@ BEGIN
     -- Mostrar el resultado
     dbms_output.put_line(nombre || ' tiene un salario de: ' || salario);
 END;
-*/
-
-
-
+/
 
 
 /*
@@ -68,9 +64,8 @@ END;
     Esta hereda la estructura y tipos de datos de todas las columnas de la tabla o consulta
 */
 
-/*
-SET SERVEROUTPUT ON
 
+SET SERVEROUTPUT ON
 DECLARE
      --Variable que almacena toda una fila de empleados
     empleado employees%ROWTYPE;
@@ -86,15 +81,12 @@ BEGIN
     -- Mostrar el resultado
     dbms_output.put_line(empleado.first_name || ' tiene un salario de: ' || empleado.salary);
 END;
-*/
-
-
+/
 
 
 /*
     PRÁCTICAS
 */
-
 
 
 /*
@@ -104,14 +96,17 @@ END;
     y la visualice
 */  
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     --Variable que contendrá  el salario, con el tipo de dato de la columna 'salary'
     salario_maximo employees.salary%TYPE; 
 BEGIN
-    SELECT MAX(salary) 
-        INTO salario_Maximo
+
+    SELECT 
+        MAX(salary) 
+    INTO 
+        salario_Maximo
     FROM 
         EMPLOYEES
     WHERE 
@@ -120,9 +115,7 @@ BEGIN
     --Mostrar resultado
     dbms_output.put_line('El salario maximo del departamento 100 es:' || salario_Maximo);
 END;
-*/
-
-
+/
 
 
 /*
@@ -130,7 +123,7 @@ END;
     Visualizar el tipo de trabajo del empleado número 100
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     --Variable que contendrá  el tipo de trabajo, con el tipo de dato de la columna 'job_id'
@@ -146,7 +139,7 @@ BEGIN
     --Mostrar resultado
     dbms_output.put_line('EL tipo de trabajo es: ' || tipoTrabajo);
 END;
-*/
+/
 
 
 /*
@@ -158,7 +151,7 @@ END;
       Crear dos variables para albergar los valores.
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaracion de variable, con el mismo tipo de dato de department_id
@@ -193,8 +186,7 @@ BEGIN
     dbms_output.put_line(departamento_nombre);
     dbms_output.put_line(numero_empleados);
 END;
-*/
-
+/
 
 
 /*
@@ -203,7 +195,7 @@ END;
     de la empresa e indicar su diferencia
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     --Declaracion de variables
@@ -225,7 +217,6 @@ BEGIN
     dbms_output.put_line('Salario mayor: ' || salario_mayor || ' ' || 'Salario menor: ' || salario_menor  ||  ' ' 
     || 'diferencia'  || ' ' || salario_diferencia);
 END;
-
-*/
+/
 
 

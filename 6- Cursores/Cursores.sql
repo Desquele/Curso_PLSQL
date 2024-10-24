@@ -26,6 +26,7 @@
     Atributos implicitos
 */
 
+
 /*
 SQL%ISOPEN -> Aplica solo a cursores explícitos porque verifica si un cursor está abierto.
 SQL%FOUND --> Indica si se devolvió al menos una fila.
@@ -101,7 +102,6 @@ END;
 */
 
 
-/*
 DECLARE
     -- Declarar el cursor
     CURSOR regions_cursor IS SELECT * FROM regions;
@@ -123,8 +123,6 @@ BEGIN
     CLOSE regions_cursor;
 END;
 /
-*/
-
 
 
 /*
@@ -143,8 +141,8 @@ END;
     Recorrer cursor
 */
 
+
 -- LOOP
-/*
 DECLARE
     -- Declaramos el cursor
     CURSOR cursor_regions IS SELECT * FROM regions;
@@ -167,11 +165,9 @@ BEGIN
     CLOSE cursor_regions;
 END;
 /
-*/
 
 
 -- BUCLE FOR
-/*
 DECLARE
     CURSOR cursor_regions IS SELECT * FROM regions;
 BEGIN
@@ -181,26 +177,23 @@ BEGIN
     END LOOP;
 END;
 /
-*/
+
 
 -- BUCLE FOR CON SUBQUERIES
-/*
 SET SERVEROUTPUT ON
 BEGIN
     FOR i IN (SELECT * FROM REGIONS) LOOP
         dbms_output.put_line(i.region_name);
     END LOOP;
 END;
-*/
-
-
-
+/
 
 
 /*
     Cursores con parametros
 */
-/*
+
+
 DECLARE
     CURSOR cursor_empleados(salario NUMBER) IS SELECT * FROM employees WHERE salary > salario;
     
@@ -217,14 +210,14 @@ BEGIN
     
     dbms_output.put_line('Número de empleados: ' || cursor_empleados%rowcount || ' ' || 'empleados');
 END;
-*/
-
+/
 
 
 /*
     WHERE CURRENT OF
 */
-/*
+
+
 DECLARE
     CURSOR cursor_empleado_actualizar IS SELECT * FROM employees FOR UPDATE;
     
@@ -251,14 +244,12 @@ BEGIN
     CLOSE cursor_empleado_actualizar;
 END;
 /
-*/
-
-
 
 
 /*
     PRÁCTICA CON CURSORES
 */
+
 
 /*
     Hacer un programa que tenga un cursor que vaya visualizando los salarios de
@@ -266,7 +257,8 @@ END;
     RAISE_APPLICATION_ERROR indicando que el sueldo del jefe no se puede
     ver
 */
-/*
+
+
 DECLARE
     --Declaración de cursor
     CURSOR c_empleados_salarios IS SELECT employee_id, first_name,last_name, salary FROM employees;
@@ -294,8 +286,6 @@ BEGIN
     END LOOP;   
 END;
 /
-*/
-
 
 
 /*
@@ -318,12 +308,12 @@ END;
     poner “No es jefe de nada”
 
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     --Cursor con todos los empleados
-    CURSOR c_empleados IS 
-        SELECT * FROM employees;
+    CURSOR c_empleados IS SELECT * FROM employees;
 
     --Cursor departamento con el manager_id
     CURSOR c_departamentos(id_manager departments.manager_id%type) IS 
@@ -354,16 +344,13 @@ BEGIN
 END;
 /
 
-*/
-
-
-
 
 /*
     -Crear un cursor con parámetros que pasando el número de departamento
     visualice el número de empleados de ese departamento
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     CURSOR c_empleados_cantidad(numeroDepartamento employees.department_id%type) IS 
@@ -383,11 +370,6 @@ BEGIN
     END LOOP;
 END;
 /
-*/
-
-
-
-
 
 
 /*
@@ -395,7 +377,8 @@ END;
     nombre de los empleados que sean ST_CLERK. Es decir, no declaramos el
     cursor sino que lo indicamos directamente en el FOR.
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
 BEGIN
@@ -405,26 +388,22 @@ BEGIN
     
 END;
 /
-*/
-
-
-
-
 
 
 /*
     -Creamos un bloque que tenga un cursor para empleados. Debemos crearlo con
-FOR UPDATE.
-o Por cada fila recuperada, si el salario es mayor de 8000 incrementamos el
-salario un 2%
-o Si es menor de 8000 lo hacemos en un 3%
-o Debemos modificarlo con la cláusula CURRENT OF
-o Comprobar que los salarios se han modificado correctamente
+    FOR UPDATE.
+    o Por cada fila recuperada, si el salario es mayor de 8000 incrementamos el
+    salario un 2%
+    o Si es menor de 8000 lo hacemos en un 3%
+    o Debemos modificarlo con la cláusula CURRENT OF
+    o Comprobar que los salarios se han modificado correctamente
 */
+
 
 SET SERVEROUTPUT ON
 DECLARE
-    -- Declaación del cursor
+    -- Declaración del cursor
     CURSOR c_empleado_salario_actualizar IS SELECT salary FROM employees FOR UPDATE;
     
 BEGIN
@@ -448,3 +427,4 @@ BEGIN
       -- Confirmar que se han actualizado los salarios
     dbms_output.put_line('Los salarios se han actualizado correctamente.');
 END;
+/

@@ -2,6 +2,7 @@
     BLOQUES ANIDADOS, ÁMBITO DE LOS BLOQUES Y FUNCIONES SQL EN ORACLE
 */
 
+
 /*
     Bloques anidados
     Permite agrupar, ordenar trozos de golpes
@@ -10,7 +11,7 @@
     Son independientes los bloques hijos heredan cosas del bloque padre pero no al revéz
 */
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON -- solo una vez, porque es aplicado a todo el bloque
 
@@ -22,21 +23,18 @@ BEGIN
         dbms_output.put_line(numero1);
     END;
 END;
-
-*/
-
+/
 
 
 /*
     Ámbito de variables en bloques anidados
     "Las variables del bloque padre pueden ser accedidas
-        por el bloque hijo pero no al contrario"
+    por el bloque hijo pero no al contrario"
         
     Las variables de el bloque hijo no sobreescribe, sino que son variable propias.
 */
 
 
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 
@@ -60,7 +58,7 @@ BEGIN
     dbms_output.put_line('Y:= ' || propiaHIjo); -- Da error porque variables del bloque hijo son propias, o puede acceder el padre
 
 END;
-*/
+/
 
 
 /*
@@ -78,7 +76,7 @@ END;
     si se imprime la variable de nuevo, esta se muestra con el valor que fue dado en el bloque padre.
     
 */
-/*
+
 SET SERVEROUTPUT ON
 
 DECLARE
@@ -93,6 +91,7 @@ BEGIN
     dbms_output.put_line(x);
 END;
 */
+
 
 /*
 Es este bloque correcto? Si no es así, ¿por qué falla? no es correcto
@@ -129,9 +128,6 @@ END;
 */
 
 
-
-
-
 /*
     USO DE FUNCIONES SQL EN PL SQL
     Funciones de SQL se puede utilizar dentro de PLSQL
@@ -145,8 +141,6 @@ END;
 */
 
 
-
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variables
@@ -165,15 +159,12 @@ BEGIN
     dbms_output.put_line(fecha);
     dbms_output.put_line(ROUND(numeroDecimal, 2));
 END;
-
-*/
-
+/
 
 
 /*
     PRACTICA FUNCIONES
 */
-
 
 
 /*
@@ -186,7 +177,8 @@ END;
     • Además siempre en mayúscula
     • Por ejemplo alberto pérez García debería aparecer--> A.P.G
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     nombre    VARCHAR2(20);
@@ -203,7 +195,7 @@ BEGIN
      -- Mostrar
      dbms_output.put_line ( upper ( iniciales ) );
 END;
-*/
+/
 
 
 /*

@@ -1,8 +1,6 @@
-
 /*
     BUCLE LOOP, LOOPS ANINADOS, COMANDO CONTINUE, BUCLE FOR, BUCLE WHILE Y COMANDO GOTTO
 */
-
 
 
 /*
@@ -10,7 +8,6 @@
 */
 
 
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variables
@@ -27,18 +24,14 @@ BEGIN
         END LOOP;
       
 END;
-
-*/
-
-
+/
 
 
 /*
     Practica
- */ 
+*/ 
 
 
-/*
 --1: Imprimir números del 1 al 20
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
@@ -54,10 +47,9 @@ BEGIN
         EXIT WHEN contador = 20;
     END LOOP;
 END;
+/
 
-  */
 
-/*
 
 --Sumar los primeros 10 números
 -- Habilita la salida de mensajes en la consola
@@ -76,6 +68,8 @@ BEGIN
     
     dbms_output.put_line(suma);
 END;
+/
+
 
 -- Ejercicio 3: Contar múltiplos de 3 entre 1 y 30
 -- Habilita la salida de mensajes en la consola
@@ -99,9 +93,7 @@ BEGIN
     END LOOP;
     dbms_output.put_line(contadorMUltiplos);
 END;
-
-*/
-
+/
 
 
 /*
@@ -109,7 +101,6 @@ END;
 */
 
 
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variables
@@ -135,17 +126,17 @@ BEGIN
     END LOOP parent;
     dbms_output.put_line('FINISH');
 END;
+/
 
-*/
 
 /*
     CONTINUE
-    Es til cuando deseas que, bajo ciertas condiciones, 
+    Es util cuando deseas que, bajo ciertas condiciones, 
     el flujo del bucle se reinicie desde el comienzo, 
     omitiendo el resto de las instrucciones en la iteración actual.
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     x NUMBER := 0;
@@ -161,17 +152,21 @@ BEGIN
         EXIT WHEN x = 5;
     END LOOP;
 END;
-*/
+/
+
 
 /*
     Practica continue
 */
+
 
 /*
     1- Ejercicio 1: Imprimir números pares entre 1 y 20
     Crea un bloque PL/SQL que utilice un bucle para 
     imprimir solo los números pares entre 1 y 20. 
     Usa CONTINUE para saltar los números impares.
+*/
+
 
 SET SERVEROUTPUT ON
 DECLARE
@@ -187,11 +182,9 @@ BEGIN
         EXIT WHEN contador > 20;  -- Salir cuando el contador sea mayor que 20
     END LOOP;
 END;
+/
 
-*/
 
-
-/*
 --Suma de numeros menos multiplos de 3
 SET SERVEROUTPUT ON
 DECLARE
@@ -211,11 +204,9 @@ BEGIN
     
     dbms_output.put_line('La suma de los números que no son múltiplos de 3 es: ' || suma);
 END;
-*/
+/
 
 
-
-/*
 SET SERVEROUTPUT ON
 DECLARE
     x NUMBER := 1;
@@ -231,10 +222,7 @@ BEGIN
         EXIT WHEN x = 16;  -- Detener el bucle cuando x llegue a 16
     END LOOP;
 END;
-
-*/
-
-
+/
 
 
 /*
@@ -244,7 +232,7 @@ END;
         - i solo funciona en el bucle for
 */
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 --Declaración de variables
@@ -264,10 +252,9 @@ BEGIN
         dbms_output.put_line(i);   
     END LOOP;
 END;
-*/
+/
 
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
 BEGIN
@@ -277,22 +264,20 @@ BEGIN
    END LOOP;
    
 END;
-*/
+/
+
 
 -- 1 Mostrar los números del 1 - 100
-
-/*
 SET SERVEROUTPUT ON
 BEGIN
     FOR i IN 1..100 LOOP
         dbms_output.put_line(i);
     END LOOP;
 END;
-*/
+/
+
 
 --   Sumar los números del 1 al 100
-
-/*
 SET SERVEROUTPUT ON
 DECLARE
     suma NUMBER :=0;
@@ -304,11 +289,12 @@ BEGIN
     dbms_output.put_line(suma);
 
 END;
-*/
+/
 
 -- 3: Mostrar números pares entre 1 y 20
+
+
 -- Forma 1:
-/*
 SET SERVEROUTPUT ON
 BEGIN
     FOR i IN 1..20 LOOP
@@ -316,11 +302,10 @@ BEGIN
         dbms_output.put_line(i);
     END LOOP;
 END;
-*/
+/
 
 
 -- Forma 2
-/*
 SET SERVEROUTPUT ON
 BEGIN
     FOR i IN 1..20 LOOP
@@ -329,11 +314,9 @@ BEGIN
         END IF;
     END LOOP;
 END;
-
-*/
+/
 
 -- Ejercicio 4: Multiplicaciónn acumulado (1 - 10)
-/*
 SET SERVEROUTPUT ON
 DECLARE
     multiplicador number :=1;
@@ -345,19 +328,17 @@ BEGIN
     dbms_output.put_line('La multiplicaciÃ²n es: ' || multiplicador);
     
 END;
+/
 
-*/
 
 --Números en orden descendente (20 -1)
-/*
 SET SERVEROUTPUT ON
 BEGIN
     for i IN REVERSE 1..20  LOOP
         dbms_output.put_line(i);
     END LOOP;
 END;
-*/
-
+/
 
 
 /*
@@ -366,7 +347,7 @@ END;
     "mientras se cumpla la condicion"
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     done BOOLEAN := FALSE;
@@ -390,13 +371,13 @@ BEGIN
     END LOOP;
 
 END;
-
-*/
+/
 
 
 /*
     Practica del PDF
 */
+
 
 /*
     Practica 1
@@ -404,8 +385,8 @@ END;
     bucles: LOOP, WHILE y FOR
 */
 
+
 --Loop
-/*
 DECLARE
     x NUMBER;
     z NUMBER;
@@ -426,9 +407,10 @@ BEGIN
     END LOOP;
 
 END;
+/
 
-WHILE
 
+-- WHILE
 DECLARE
     x NUMBER;
     z NUMBER;
@@ -447,6 +429,8 @@ BEGIN
     END LOOP;
 
 END;
+/
+
 
 BEGIN
     FOR x IN 1..10 LOOP
@@ -457,8 +441,7 @@ BEGIN
 
     END LOOP;
 END;
-
-*/
+/
 
 
 
@@ -467,7 +450,7 @@ END;
     Mediante el bucle WHILE escribir la frase al revez
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     texto VARCHAR2(25) := 'Hola';
@@ -485,8 +468,8 @@ BEGIN
     
     dbms_output.put_line(textoReves);
 END;
+/
 
-*/
 
 /*
     Práctica 4
@@ -496,7 +479,8 @@ END;
     -   Por ejemplo Alberto  *******
     -   O por ejemplo Pedro  *****
 */
-/*
+
+
 DECLARE
     nombre     VARCHAR2(100);
     tamanoNombre PLS_INTEGER;
@@ -513,8 +497,8 @@ BEGIN
                          || '-->'
                          || asteriscos);
 END;
+/
 
-*/
 
 /*
     Practica 5
@@ -523,6 +507,7 @@ END;
     Las inicializamos con algún valor:
     o Debemos sacar los nÃºmeros que sean múltiplos de 4 de ese rango
 */
+
 
 DECLARE
     inicio NUMBER;
@@ -536,4 +521,4 @@ BEGIN
         END IF;
     END LOOP;
 END;
-
+/

@@ -27,9 +27,8 @@
     CREAR UN PROCEDIMIENTO
 */
 
--- Creación
 
-/*
+-- Creación
 -- Creamos el procedimiento
 CREATE OR REPLACE PROCEDURE p_mostrar_numero 
 -- Acá va la zona de declaración
@@ -40,12 +39,13 @@ BEGIN
     dbms_output.put_line(numero);
 END p_mostrar_numero;
 /
-*/
 
 
 /*
    UTILIZACIÓN
-    
+*/
+
+
 -- Utilización forma 1 dentro de un bloque
 SET SERVEROUTPUT ON
 BEGIN
@@ -56,19 +56,16 @@ END;
 
 -- Utilización 2 se utiliza EXECUTE
 EXECUTE p_mostrar_numero;
-*/
-
-
 
 
 /*
     Ver el código fuente de un procedimiento o función
 */
 
+
 -- USER_OBJECTS -> Permite ver todos los objectos
 
 -- Ver todos los objetos que hay
-/*
 SELECT 
 * 
 FROM 
@@ -76,11 +73,9 @@ FROM
 WHERE
     OBJECT_TYPE = 'PROCEDURE';
 
-*/
-
 
 -- Ver cantidad de objetos
-/*
+
 SELECT 
     OBJECT_TYPE, 
     COUNT(*)
@@ -88,29 +83,24 @@ FROM
     USER_OBJECTS
 GROUP BY
     OBJECT_TYPE;
-*/
+
 
 -- Ver el código fuente
-/*
 SELECT
     *
 FROM 
     USER_SOURCE
 WHERE 
     NAME = 'P_MOSTRAR_NUMERO';
-*/
 
 
 -- Ver el código en formato texto
-/*
 SELECT
     TEXT
 FROM 
     USER_SOURCE
 WHERE 
     NAME = 'P_MOSTRAR_NUMERO';
-*/
-
 
 
 /*
@@ -118,14 +108,13 @@ WHERE
 */
     
 
-
 /*
     PARÁMETRO TIPO IN
     Es el parametro por defecto.
     Las variables entran solo de lectura por ende no se puede modificar
 */
 
-/*
+
 -- Creamos el procedimiento almacenado
 CREATE OR REPLACE PROCEDURE p_calcular_descuento
 (
@@ -167,14 +156,12 @@ EXCEPTION
         dbms_output.put_line('No existe el empleado');
 END;
 /
-*/
 
 
 /*
     UTILIZANDO EL PROCEDIMIENTO ALMACENADO
 */
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaramos las variables
@@ -190,8 +177,7 @@ BEGIN
     p_calcular_descuento(id_empleado, descuento);
 
 END;
-*/
-
+/
 
 
 /*
@@ -199,7 +185,7 @@ END;
     Permite que devuelva un valor dentro de un procedimiento
 */
 
-/*
+
 -- Creamos el procedimiento almacenado
 CREATE OR REPLACE PROCEDURE P_CALCULAR_DESCUENTO_OUT
 (
@@ -239,8 +225,6 @@ EXCEPTION
         dbms_output.put_line('No existe el empleado');
 END;
 /
-*/
-
 
 
 /*
@@ -248,7 +232,6 @@ END;
 */
 
 
-/*
 SET SERVEROUTPUT ON
 DECLARE
     id_empleado NUMBER;
@@ -265,16 +248,14 @@ BEGIN
     dbms_output.put_line('r: ' || r);
 
 END;
-
-*/
-
-
+/
 
 
 /*
     Parámetros de tipo IN - OUT
 */
-/*
+
+
 CREATE OR REPLACE PROCEDURE P_CALCULAR_DESCUENTO_IN_OUT
 (
     -- parámetros de entrada
@@ -313,16 +294,13 @@ EXCEPTION
         dbms_output.put_line('No existe el empleado');
 END;
 /
-*/
-
-
 
 
 /*
     UTILIZANDO EL PROCEDIMIENTO ALMACENADO
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     id_empleado NUMBER;
@@ -337,7 +315,7 @@ BEGIN
     dbms_output.put_line('Descuento: ' || descuento);
 
 END;
-*/
+/
 
 
 
@@ -352,7 +330,7 @@ END;
     salario de todos los empleados 
 */
 
-/*
+
 CREATE OR REPLACE PROCEDURE P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO
 IS
     -- Declaración de cursor
@@ -367,15 +345,13 @@ BEGIN
 
 END P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
 /
-*/
+
+
 /*
     UTILIZACIÓN DE PROCEDIMIENTO
 */
 
 --EXECUTE P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
-
-
-
 
 
 /*
@@ -386,7 +362,7 @@ END P_MOSTRAR_NOMBRE_SALARIO_EMPLEADO;
     • Debe devolver el número de empleados en una variable de tipo OUT
 */
 
-/*
+
 CREATE OR REPLACE PROCEDURE P_MOSTRAR_NUMERO_EMPLEADOS_DEPARTAMENTO
 (
     numero_departamento_obtenido IN NUMBER,
@@ -411,7 +387,7 @@ END P_MOSTRAR_NUMERO_EMPLEADOS_DEPARTAMENTO;
     UTILIZACIÓN DE PROCEDIMIENTO
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
  resultado NUMBER := 0;
@@ -420,8 +396,7 @@ BEGIN
     
     dbms_output.put_line('El resultado es: ' || resultado);
 END;
-*/
-
+/
 
 
 /*
@@ -431,8 +406,8 @@ END;
     • Debemos usar un parámetro de tipo IN-OUT
 */
 
+
 -- Creación del procedimiento
-/*
 CREATE OR REPLACE PROCEDURE formateo_cuenta 
 (
     -- Declaración de parámetros de entrada
@@ -453,4 +428,3 @@ BEGIN
     numero := guardar1 || '-' || guardar2 || '-' || guardar3|| '-' || guardar4;
 END;
 /
-*/

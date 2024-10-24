@@ -2,6 +2,7 @@
     BOOLEAN, CONSTANTES, OPERADORES
 */
 
+
 /*
 	Boolean
     Existe:
@@ -10,7 +11,7 @@
         - NULL
 */
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 --Declaración de variables
@@ -23,7 +24,7 @@ BEGIN
     b1:= TRUE;
     b1:= NULL;
 END;
-*/
+/
 
 
 /*
@@ -32,8 +33,6 @@ END;
     Se le puede decir que una variable es del mismo tipo que "x" columna
 */
 
-
-/*
 
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
@@ -48,9 +47,7 @@ BEGIN
     dbms_output.put_line(numero1);
     dbms_output.put_line(numero2);
 END;
-
-*/
-
+/
 
 
 /*
@@ -63,7 +60,6 @@ END;
     '' EXPONENTE
     | | CONCATENAR
 */
-
 
 
 -- Habilita la salida de mensajes en la consola
@@ -83,13 +79,13 @@ BEGIN
     dbms_output.put_line(SYSDATE-fecha); -- Fecha actual menos la fecha de la variable
     dbms_output.put_line(fecha+1); -- Sumar 1 día a la fecha
 END;
+/
 
 
 /*
     PRACTICA ADICIONAL VARIABLES, CONSTANTES Y %TYPE
 */
 
-/*
 
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
@@ -107,5 +103,4 @@ BEGIN
     
     dbms_output.put_line(resultado);
 END;
-
-*/
+/

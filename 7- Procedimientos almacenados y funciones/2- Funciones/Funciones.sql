@@ -48,7 +48,6 @@ END;
 /
 
 
-
 /*
     UTILIZANDO LA FUNCIÓN
 */
@@ -74,6 +73,7 @@ BEGIN
 END;
 /
 
+
 /*
     FUNCIONES EN COMANDOS SQL
 */
@@ -83,5 +83,3 @@ SELECT
     ROUND(F_CALCULAR_DESCUENTO(employee_id, 29), 2) AS "Descuento"
 FROM
     employees;
-    
-    

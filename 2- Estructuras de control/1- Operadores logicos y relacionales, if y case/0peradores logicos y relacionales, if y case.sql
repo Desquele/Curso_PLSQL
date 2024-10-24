@@ -21,16 +21,14 @@
 */
 
 
-
 /*
     IF
 */
 
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
-
 DECLARE
     x NUMBER := 20;
 BEGIN
@@ -43,7 +41,7 @@ BEGIN
         dbms_output.put_line('Otro valor');
     END IF;
 END;
-*/
+/
 
 
 
@@ -51,7 +49,7 @@ END;
     PRACTICAS 
 */
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 DECLARE
@@ -74,8 +72,7 @@ BEGIN
 
     dbms_output.put_line('Sales:= ' || sales || ', bonus:= ' || bonus);
 END;
-
-*/
+/
 
 
 /*
@@ -88,7 +85,7 @@ END;
     • Por ejemplo MOD(10,4) nos devuelve el resto de dividir 10 por 4.
 */
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variales
@@ -106,8 +103,7 @@ resultado := MOD(numero, 2);
         dbms_output.put_line('Es impar');
     END IF;
 END;
-
-*/
+/
 
 
 /*
@@ -123,7 +119,6 @@ END;
 */
 
 
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variables
@@ -147,10 +142,9 @@ BEGIN
         dbms_output.put_line('NO hay informaciÃ²n');
     END IF;
 END;
+/
 
-*/
 
-/*
 --Comparar dos numeros
 SET SERVEROUTPUT ON
 DECLARE
@@ -168,9 +162,10 @@ BEGIN
         dbms_output.put_line('Son numeros iguales');
     END IF;
 END;
-*/
+/
 
-/*
+
+
 --Verificar si el número es posito y par
 SET SERVEROUTPUT ON
 DECLARE
@@ -187,11 +182,10 @@ BEGIN
     END IF;
     
 END;
+/
 
-*/
 
-/*
---Verificar si el número es positov y par
+--Verificar si la edad
 SET SERVEROUTPUT ON
 DECLARE
     edad NUMBER;
@@ -205,11 +199,9 @@ BEGIN
         dbms_output.put_line('Menor de edad');    
     END IF;
 END;
+/
 
-*/
 
-
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 
@@ -231,15 +223,14 @@ BEGIN
         dbms_output.put_line('Son iguales');
     END IF;
 END;
-*/
-
-
+/
 
 
 /*
     CASE
 */
-/*
+
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUT ON
 -- Declaración de variables
@@ -259,9 +250,9 @@ BEGIN
         ELSE dbms_output.put_line('No such value');
     END CASE;
 END;
-*/
+/
 
-/*
+
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUT ON
 DECLARE
@@ -279,9 +270,7 @@ BEGIN
         ELSE dbms_output.put_line('No such value');
     END CASE;
 END;
-
-*/
-
+/
 
 
 /*
@@ -289,8 +278,6 @@ END;
 */
 
 
-
-/*
 -- Habilita la salida de mensajes en la consola
 SET SERVEROUTPUT ON
 -- Declaración de variable
@@ -310,11 +297,9 @@ BEGIN
     END CASE;
   
 END;
-*/
+/
 
 
-
-/*
 SET SERVEROUTPUT ON
 DECLARE
     nota NUMBER;
@@ -329,11 +314,9 @@ BEGIN
     
     
 END;
+/
 
-*/
 
-
-/*
 SET SERVEROUTPUT ON
 DECLARE
     nota NUMBER;
@@ -345,17 +328,15 @@ BEGIN
         WHEN 5 THEN dbms_output.put_line('Aplazado');
         ELSE dbms_output.put_line('NO hay informaciÃ²n');
     END CASE;
-    
-    
 END;
-*/
+/
 
 
 /*
     Practica estructura de control
 */
 
-/*
+
 SET SERVEROUTPUT ON
 DECLARE
     usuario VARCHAR2(240);
@@ -371,8 +352,4 @@ BEGIN
     END CASE;
 
 END;
-
-*/
-
-
-
+/

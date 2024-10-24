@@ -1,8 +1,4 @@
 /*
-    
-*/
-
-/*
     INTRODUCCIÓN A PACKAGES
     Los paquetes en PL/SQL son una forma de agrupar y organizar 
     procedimientos, funciones, variables, y otros objetos relacionados en un solo módulo, 
@@ -25,7 +21,7 @@
     CREAR LAS ESPECIFICACIONES DEL PAQUETE
 */
 
-/*
+
 -- Creamos el paquete
 CREATE OR REPLACE PACKAGE ejemplo_package1
 IS
@@ -35,9 +31,8 @@ IS
     numero2 NUMBER;
 END;
 /
-*/
 
-/*
+
 -- Utilización del paquete
 SET SERVEROUTPUT ON
 BEGIN
@@ -51,8 +46,6 @@ BEGIN
 
 END;
 /
-*/
-
 
 
 /*
@@ -69,7 +62,7 @@ END;
     Al cerrar la sesión, todas las variables se reinician a sus valores iniciales.
 */
 
-/*
+
 CREATE OR REPLACE PACKAGE ejemplo_package1_ambito
 IS
     -- Declaración de las variables
@@ -78,9 +71,8 @@ IS
     numero2 NUMBER;
 END;
 /
-*/
 
-/*
+
 -- Utilización del paquete
 SET SERVEROUTPUT ON
 BEGIN
@@ -94,16 +86,14 @@ BEGIN
 
 END;
 /
-*/
-
 
 
 /*
     CREAR EL CUERPO DEL PACKAGE
 */
 
+
 -- Creación del package
-/*
 CREATE OR REPLACE PACKAGE CONVERSION_PKG 
 IS
     -- Declaración del procedimiento almacenado para convertir texto
@@ -113,9 +103,8 @@ IS
     );
 END CONVERSION_PKG;
 /
-*/
 
-/*
+
 -- Cuerpo del package
 CREATE OR REPLACE PACKAGE BODY CONVERSION_PKG
 IS
@@ -165,37 +154,27 @@ IS
 
 END CONVERSION_PKG;
 /
-*/
+
 
 /*
     UTILIZACIÓN
 */
 
-/*
+
 SET SERVEROUTPUT ON
 BEGIN 
     -- nombre package. nombre procedimiento
  CONVERSION_PKG.CONVERTIR_TEXTO('Douglas','U');
 END;
 /
-*/
-
-
-
-
-
-
-
-
-
 
 
 /*
     USAR FUNCIONES DE UN PAQUETE EN COMANDOS SQL
 */
 
+
 -- Creación del package
-/*
 CREATE OR REPLACE PACKAGE CONVERSION_PKG_FUNCION
 IS
     -- Declaración del procedimiento almacenado para convertir texto
@@ -205,9 +184,8 @@ IS
     ) RETURN VARCHAR2;
 END;
 /
-*/
 
-/*
+
 -- Cuerpo del package
 CREATE OR REPLACE PACKAGE BODY CONVERSION_PKG_FUNCION
 IS
@@ -259,13 +237,13 @@ IS
 
 END CONVERSION_PKG_FUNCION;
 /
-*/
 
 
 /*
     UTILIZACIÓN
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     texto VARCHAR2(50); 
@@ -280,21 +258,6 @@ SELECT
     first_name, CONVERSION_PKG_FUNCION.CONVERTIR_TEXTO(FIRST_NAME, 'U')
 FROM
     employees;
-
-*/
-
-/*
-    SOBBRECARGA DE PROCEDIMIENTOS
-*/
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -316,8 +279,8 @@ FROM
     La función debe devolver el salario actual del empleado.
 */
 
+
 -- Definicón del package
-/*
 CREATE OR REPLACE PACKAGE GESTION_SALARIOS_PKG
 IS
     -- Definir el procedimiento
@@ -335,12 +298,9 @@ IS
     RETURN NUMBER;
 END GESTION_SALARIOS_PKG;
 /
-*/
-
 
 
 -- Cuerpo del package
-/*
 CREATE OR REPLACE PACKAGE BODY GESTION_SALARIOS_PKG
 IS
 
@@ -365,8 +325,7 @@ IS
     END P_INCREMENTAR_SALARIO;
     
     
-    
-    
+  
     -- Funcion para consultar salario actual
     FUNCTION F_CONSULTAR_SALARIO
     (
@@ -394,12 +353,13 @@ IS
 
 END GESTION_SALARIOS_PKG;
 /
-*/
+
 
 /*
     UTILIZACIÓN
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     employee_id NUMBER;
@@ -419,10 +379,6 @@ BEGIN
     dbms_output.put_line(resultado);
 END;
 /
-*/
-
-
-
 
 
 /*
@@ -441,7 +397,6 @@ END;
 
 
 -- Definición del package
-/*
 CREATE OR REPLACE PACKAGE GESTION_DEPARTAMENTOS_PKG
 IS
     -- Definición del procedimiento
@@ -457,11 +412,9 @@ IS
     RETURN NUMBER;
 END GESTION_DEPARTAMENTOS_PKG;
 /
-*/
 
 
 -- Cuerpo del package
-/*
 CREATE OR REPLACE PACKAGE BODY GESTION_DEPARTAMENTOS_PKG
 IS
     -- Procedimiento para insertar un departamento
@@ -499,12 +452,13 @@ IS
     
 END GESTION_DEPARTAMENTOS_PKG;
 /
-*/
+
 
 /*
     UTILIZACIÓN
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Variables declaración
@@ -532,7 +486,6 @@ BEGIN
 
 END;
 /
-*/
 
 
 /*
@@ -550,7 +503,6 @@ END;
 */
 
 -- Creación del package
-/*
 CREATE OR REPLACE PACKAGE GESTION_EMPLADOS_DEPARTAMENTO_PKG
 IS
     -- Definición de la función que contará el número de empleados por departamento
@@ -567,11 +519,9 @@ IS
     );
 END;
 /
-*/
 
 
 -- Cuerpo del package
-/*
 CREATE OR REPLACE PACKAGE BODY GESTION_EMPLADOS_DEPARTAMENTO_PKG 
 AS
 
@@ -617,12 +567,13 @@ AS
 
 END GESTION_EMPLADOS_DEPARTAMENTO_PKG;
 /
-*/
+
 
 /*
     UTILIZACIÓN
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     departamento_id NUMBER;
@@ -637,14 +588,13 @@ BEGIN
     
     GESTION_EMPLADOS_DEPARTAMENTO_PKG.P_LISTAR_EMPLEADOS_DEPARTAMENTO(departamento_id);
 END;
-*/
-
+/
 
 
 /*
     SOBRECARGA DE PROCEDIMIENTO
 */
-/*
+
 CREATE OR REPLACE PACKAGE SOBRECARGA_PKG
 AS
     -- Definición de funciones
@@ -661,9 +611,8 @@ AS
     RETURN NUMBER;
 END SOBRECARGA_PKG;
 /
-*/
 
-/*
+
 CREATE OR REPLACE PACKAGE BODY SOBRECARGA_PKG 
 AS
 
@@ -716,16 +665,13 @@ AS
 
 END SOBRECARGA_PKG;
 /
-*/
-
-
-
 
 
 /*
     UTILIZANDO
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     departamento_id NUMBER;
@@ -738,17 +684,13 @@ BEGIN
     -- Mostrar
     dbms_output.put_line(SOBRECARGA_PKG.F_CONTAR_EMPLEADOS(departamento_id));
 END;
-*/
-
-
+/
 
 
 /*
     PAQUETES PREDEFINIDOS POR ORACLE
     https://docs.oracle.com/en/database/oracle/oracle-database/19/arpls/DBMS_ALERT.html#GUID-30038E9F-A074-4778-891F-335827E6071A
 */
-
-
 
 
 /*
@@ -789,7 +731,6 @@ END;
 
 
 -- Definición del package
-/*
 CREATE OR REPLACE PACKAGE regiones_pkg IS
     -- Declaración de procedimientos
     
@@ -820,11 +761,9 @@ CREATE OR REPLACE PACKAGE regiones_pkg IS
 
 END regiones_pkg;
 /
-*/
 
 
 -- Cuerpo del package
-/*
 CREATE OR REPLACE PACKAGE BODY regiones_pkg IS
 
     -- Función para verificar si existe la región por nombre
@@ -836,7 +775,8 @@ CREATE OR REPLACE PACKAGE BODY regiones_pkg IS
     -- Verifica si la región existe con una consulta directa
         SELECT
             COUNT(*)
-        INTO cantidad
+        INTO 
+            cantidad
         FROM
             regions
         WHERE
@@ -958,7 +898,6 @@ CREATE OR REPLACE PACKAGE BODY regiones_pkg IS
 
 END regiones_pkg;
 /
-*/
 
 
 /*
@@ -966,7 +905,6 @@ END regiones_pkg;
 */
 
 
-/*
 SET SERVEROUTPUT ON
 
 DECLARE
@@ -990,10 +928,6 @@ BEGIN
     --dbms_output.put_line(REGIONES_PKG.F_OBTENER_NOMBRE_REGION(100));
 END;
 /
-*/
-
-
-
 
 
 /*
@@ -1017,7 +951,6 @@ END;
 */
 
 -- Definición del package
-/*
 CREATE OR REPLACE PACKAGE NOMINA_PKG
 IS
     -- Fefinir las funciones
@@ -1044,9 +977,8 @@ IS
     RETURN NUMBER;
 END;
 /
-*/
 
-/*
+
 -- Cuerpo del package
 CREATE OR REPLACE PACKAGE BODY NOMINA_PKG AS
 
@@ -1207,7 +1139,8 @@ END NOMINA_PKG;
 /*
     UTILIZANDO
 */
-/*
+
+
 SET SERVEROUTPUT ON
 DECLARE
     -- Declaración de variables
@@ -1225,4 +1158,3 @@ BEGIN
     dbms_output.put_line(NOMINA_PKG.F_CALCULAR_NOMINA(empleado_id, descuento, 'D'));
 END;
 /
-*/
